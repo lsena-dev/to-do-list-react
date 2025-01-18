@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 export default function NavbarExp() {
   return (
-    <header>
+    <>
       <Navbar expand="lg" className="bg-body-tertiary">
         <Container>
           <Navbar.Brand as={Link} to="/">
@@ -24,6 +24,6 @@ export default function NavbarExp() {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-    </header>
+    </>
   );
 }

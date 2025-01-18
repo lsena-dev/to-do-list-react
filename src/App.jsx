@@ -16,7 +16,9 @@ import Credits from "./components/pages/Credits";
 function App() {
   return (
     <Router>
-      <Navbar />
+      <header>
+        <Navbar />
+      </header>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/credits" element={<Credits />} />
