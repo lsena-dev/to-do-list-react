@@ -1,18 +1,18 @@
-import Container from "react-bootstrap/esm/Container";
-import SimpleTable from "../tables/SimpleTable";
 import { useEffect, useState } from "react";
-import apiRequest from "../services/Connect";
 
-import Button from "react-bootstrap/Button";
-// forms
-import Form from "react-bootstrap/Form";
+// components provided by me
+import apiRequest from "../services/Connect";
+import SimpleTable from "../tables/SimpleTable";
 import SimpleModal from "../pop-ups/Modal";
+//bootstrap
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
+import Container from "react-bootstrap/esm/Container";
 
 export default function Home() {
-  // state das tasks
   const [tasks, setTasks] = useState([]);
-  const [taskDescription, setTaskDescription] = useState("");
   const [currentTask, setCurrentTask] = useState({});
+  const [taskDescription, setTaskDescription] = useState("");
 
   //modal update
   const [showUpdate, setShowUpdate] = useState(false);
@@ -36,7 +36,7 @@ export default function Home() {
     setShowDelete(true);
   };
 
-  // ALIMENTA A TABELA
+  // FILL IN THE TABLE
   useEffect(() => {
     apiRequest("GET")
       .then((data) => {
@@ -46,7 +46,6 @@ export default function Home() {
       .catch((err) => console.log(err));
   }, []);
 
-  // CRIA NOVAS TASKS
   function createTask(e) {
     e.preventDefault();
 
@@ -72,7 +71,6 @@ export default function Home() {
       .catch((err) => console.log(err));
   }
 
-  // BUSCA TASK POR ID
   function getTask(id) {
     apiRequest("GET", id)
       .then((data) => {
@@ -83,14 +81,12 @@ export default function Home() {
       .catch((err) => console.log(err));
   }
 
-  // ATUALIZA TASK
   function updateTask(e) {
     e.preventDefault();
 
-    // Verifica se o campo está vazio ou contém apenas espaços
     if (taskDescription.trim() === "") {
       alert("A descrição da tarefa não pode estar vazia!");
-      return; // Interrompe a execução da função
+      return;
     }
 
     const updatedTask = {
@@ -99,7 +95,7 @@ export default function Home() {
       concluded: currentTask.concluded,
     };
 
-    // atualiza a lista de tasks no estado do componente
+    // update the list of tasks in the component state
     setTasks((prevTasks) =>
       prevTasks.map((task) => (task.id === updatedTask.id ? updatedTask : task))
     );
